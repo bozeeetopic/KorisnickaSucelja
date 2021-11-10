@@ -38,19 +38,32 @@ const Student = ({ name, lName, imgSrc }) => {
 const StateDemo = () => {
     const [name, setName] = useState('');
     const [lastName, setlastName] = useState('');
-    //console.log({ name, lastName })
     const [students, setStudents] = useState(studentsOut);
+    //kondicinonalno renderrirranje
+    const [showStudents, setShowStudents] = useState(false);
 
     return (
         <main>
             <h1 className="text-center mt-5 mb-5 font-bold text-4xl underline">
                 Welcome to state demo!
             </h1>
-            <ul className="flex flex-col items-center justify-around">
-                {students.map((el) => (
-                    <Student key={el.id} {...el} />
-                ))}
-            </ul>
+            <button
+                onClick={() =>
+                    showStudents ? setShowStudents(false) : setShowStudents(true)
+                }
+                className="mt-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+                {showStudents ? 'Hide students' : 'Show students'}
+            </button>
+            {showStudents ? (
+                <ul className="flex flex-col items-center justify-around">
+                    {students.map((el) => (
+                        <Student key={el.id} {...el} />
+                    ))}
+                </ul>
+            ) : (
+                <p className="self-center text-center">Nema studenata!</p>
+            )}
             <section className="flex flex-col w-64 justify-center items-center my-0 mx-auto border-gray-500">
                 <input
                     className="border-b-2 outline-none mt-5 border-solid border-gray-500"
